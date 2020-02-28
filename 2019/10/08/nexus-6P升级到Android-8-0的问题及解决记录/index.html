@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xin98.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="nexus-6P升级到Android-8.0的问题及解决记录最后修改时间: 2019-10-16 20:33:00  背景最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。 nexus6P当前系统 : andriod6.0，目标系统 : android8.0。 尝试太久没接触过手机刷机，踩了许多雷，这两天使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nexus-6P升级到Android-8.0的问题及解决记录">
+<meta property="og:url" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Xin Coding">
+<meta property="og:description" content="nexus-6P升级到Android-8.0的问题及解决记录最后修改时间: 2019-10-16 20:33:00  背景最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。 nexus6P当前系统 : andriod6.0，目标系统 : android8.0。 尝试太久没接触过手机刷机，踩了许多雷，这两天使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png">
+<meta property="og:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png">
+<meta property="article:published_time" content="2019-10-08T02:26:36.000Z">
+<meta property="article:modified_time" content="2019-10-16T12:33:28.187Z">
+<meta property="article:author" content="XinGao">
+<meta property="article:tag" content="nexus6P">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
+
+<link rel="canonical" href="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>nexus-6P升级到Android-8.0的问题及解决记录 | Xin Coding</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xin Coding</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Studying, Gaming, Sleeping.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="algolia-results">
+  <div id="algolia-stats"></div>
+  <div id="algolia-hits"></div>
+  <div id="algolia-pagination" class="algolia-pagination"></div>
+</div>
+
+  
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nexus-6P升级到Android-8.0的问题及解决记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-08 10:26:36" itemprop="dateCreated datePublished" datetime="2019-10-08T10:26:36+08:00">2019-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-16 20:33:28" itemprop="dateModified" datetime="2019-10-16T20:33:28+08:00">2019-10-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="nexus-6P升级到Android-8-0的问题及解决记录"><a href="#nexus-6P升级到Android-8-0的问题及解决记录" class="headerlink" title="nexus-6P升级到Android-8.0的问题及解决记录"></a><strong>nexus-6P升级到Android-8.0的问题及解决记录</strong></h2><p>最后修改时间: 2019-10-16 20:33:00</p>
+<hr>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p>最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。</p>
+<p><strong>nexus6P</strong>当前系统 : andriod6.0，目标系统 : android8.0。</p>
+<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a><strong>尝试</strong></h3><p>太久没接触过手机刷机，踩了许多雷，这两天使用过NRT(<strong>N</strong>exus <strong>R</strong>oot <strong>T</strong>oolkit)和OTA(<strong>O</strong>ver-<strong>T</strong>he-<strong>A</strong>ir Technology)安装包的sideload安装方法，均出现过问题，所以安装无法成功。由于我暂时也还没有找到这两种安装方式解决方法，这里就不贴出相关的问题了。</p>
+<h3 id="Platform-tools更新的问题及解决方法"><a href="#Platform-tools更新的问题及解决方法" class="headerlink" title="Platform-tools更新的问题及解决方法"></a><strong>Platform-tools更新的问题及解决方法</strong></h3><p>首先排除工具的影响，请大家下载最新版本的工具包.</p>
+<ol>
+<li><p><strong>配置环境</strong></p>
+<p>将<code>platform-tools</code>的目录加入到<code>path</code>系统环境变量中，例如我的<code>platform-tools</code>在<code>C:\Users\G-Xin\Desktop\platformtools</code>下，相应的系统环境变量(path)就增加一条记录。配置完成后，你可以在任意的文件夹中使用<code>fastboot</code>及<code>adb</code>命令。</p>
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png" class="" title="环境配置">
+</li>
+<li><p><strong>准备好factory镜像</strong></p>
+<p>镜像下载: <a href="https://developers.google.cn/android/images#angler" target="_blank" rel="noopener">地址</a></p>
+<p>因为是采用fastboot升级安装方式，所以镜像的选择也非常重要，nexus6P的升级镜像有两种: 1. factory image  2. ota image。而fastboot升级方法只能选择使用factoryimage。</p>
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png" class="" title="factory images选择">
+
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png" class="" title="nexus6P的安装包">
+</li>
+<li><p><strong>安装</strong></p>
+<p>将下载的安装包解压到任意文件夹中。然后将imgxxxx.zip解压到当前文件夹中。</p>
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png" class="" title="factory 解压image">
+
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png" class="" title="factory 解压imgxxx.zip后的文件目录">
+
+<p>这时候正常情况下，将手机启动到bootloader界面，然后双击<code>flash-all.bat</code>（windows下），<code>flash-all.sh</code>(linux下)即可完成安装。nexus6P启动到bootloader方法: 关机后，同时按电源键和音量下键即可进入。</p>
+</li>
+<li><p><strong>遇到的问题</strong></p>
+<p>但是事情不总是一帆风顺的，很不幸，我没能安装成功，当我执行了<code>flash-all.bat</code>后，出现了<code>update package missing system.img</code> 错误。而当我解决了这个问题，安装系统成功后，又出现了卡在google logo处无法进入系统的情况。如果大家安装时遇到了这个问题，我也非常的遗憾。但是别着急，如果你按照我下面的方法重新进行安装，就能解决它，让我们继续吧！</p>
+</li>
+<li><p><strong>解决方法</strong></p>
+<p>以windows为例，首先，我们启动编辑flash-all.bat文件，注释掉<code>fastboot -w update image-angler-xxx.zip</code>注释方法是在这一行代码前面加上<code>::_</code>(注意<code>_</code>是需要键入的空格)，或者直接删除这一行。</p>
+<p>然后我们在后面加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash vendor vendor.img</span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
+
+<p>细心的读者可能发现了，安装目录下没有<code>cache.img</code> 和 <code>userdata.img</code>这两个文件，这是因为高版本的image里都把这两个文件给删除了。而缺少这两个文件，会导致我们前面说的，安装成功后一直卡在google logo处。如何获取这两个文件呢？很简单直接下载一个低版本的镜像，如android6.0，解压后将这两个文件复制过来即可。</p>
+<img src="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png" class="" title="factory 安装成功结果">
+
+
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nexus6P/" rel="tag"># nexus6P</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" rel="prev" title="xml学习笔记(3)">
+      <i class="fa fa-chevron-left"></i> xml学习笔记(3)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" rel="next" title="关于java的Matcher.matches()和find()调试记录">
+      关于java的Matcher.matches()和find()调试记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nexus-6P升级到Android-8-0的问题及解决记录"><span class="nav-number">1.</span> <span class="nav-text">nexus-6P升级到Android-8.0的问题及解决记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试"><span class="nav-number">1.2.</span> <span class="nav-text">尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Platform-tools更新的问题及解决方法"><span class="nav-number">1.3.</span> <span class="nav-text">Platform-tools更新的问题及解决方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XinGao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Xin98" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Xin98" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/emgaox@163.com" title="E-Mail → emgaox@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XinGao</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
+<script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
