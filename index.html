@@ -196,10 +196,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-10 15:51:09 / 修改时间：16:37:56" itemprop="dateCreated datePublished" datetime="2020-01-10T15:51:09+08:00">2020-01-10</time>
+              <time title="创建时间：2020-01-10 15:51:09" itemprop="dateCreated datePublished" datetime="2020-01-10T15:51:09+08:00">2020-01-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:13:32" itemprop="dateModified" datetime="2020-02-28T14:13:32+08:00">2020-02-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -227,30 +233,775 @@
       
           <h2 id="虚拟机之findSpecial问题记录"><a href="#虚拟机之findSpecial问题记录" class="headerlink" title="虚拟机之findSpecial问题记录"></a><strong>虚拟机之findSpecial问题记录</strong></h2><p>最后修改时间: 2020-01-10 15:51:09</p>
 <hr>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h3><p>在学习<code>深入理解java虚拟机&lt;周志明&gt;第三版</code>时，关于动态分派的问题做了相关的实验，其中有一个实验得出来与作者不一致的结果。先看源码(出自原书代码清单8-15)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GrandFather</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">thinking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i am grandfather"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> <span class="keyword">extends</span> <span class="title">GrandFather</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">thinking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i am father"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">thinking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">                MethodType mt = MethodType.methodType(<span class="keyword">void</span><span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                MethodHandle mh = lookup().findSpecial(GrandFather<span class="class">.<span class="keyword">class</span>, </span></span><br><span class="line">"thinking", mt, getClass());</span><br><span class="line">                mh.invoke(<span class="keyword">this</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        (<span class="keyword">new</span> Test().<span class="keyword">new</span> Son()).thinking();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我的实验结果是<code>i am father</code>， 而书上的结果是<code>i am grandfather</code></p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h3><p>通过网上冲浪，观摩大佬们的文章后找到了答案。书上的例子的结果是<code>错误</code>的，正确结果就是”i am father”，原因是：</p>
-<ul>
-<li><p><code>findSpecial</code>方法和java虚拟机字节码指令<code>invokespecial</code>对应，而<code>invokespecial</code>指令的作用是:</p>
-<ul>
-<li>调用实例构造器<code>&lt;init&gt;</code>方法、私有方法和父类方法。</li>
-</ul>
-</li>
-<li><p>MethodHandle用于模拟<code>invokespecial</code>时，必须遵守跟Java字节码里的<code>invokespecial</code>指令相同的限制——它只能调用到传给<code>findSpecial</code>方法的最后一个参数（“specialCaller”）的直接父类的版本。意思就是<code>findSpecial</code>从当前类(<code>findSpeical</code>最后一个参数一般是传入的当前类，使用<code>getClass</code>方法)出发一次最多只能搜索到它的直接父类，在这里也就是Son类调用<code>findSpecial</code>一次最多只能搜索到<code>Father</code>类。注意这里使用的<code>一次</code>，因为这个方法是可以递归调用的，也就是如果一次搜索没有找到所匹配的special方法，就会继续从继承链找，如第二次会从<code>Father</code>的父类<code>GrandFather</code>去找。如果<code>spcialCaller</code>与当前类不一致，会抛出异常。</p>
-</li>
-</ul>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a><strong>验证</strong></h3><p>为了证明上述结论，我做了以下工作：</p>
-<ul>
-<li>在GrandFather中添加了一个playing方法</li>
-<li>在Son中利用MethodHandle尝试直接调用GrandFather中的playing方法</li>
-</ul>
-<p>注意：这里调用成功的前提是，Son类的直接父类Father中没有playing方法 </p>
-<p>代码如下:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GrandFather</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">thinking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i am grandfather"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">playing</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i am grandfather, and i am playing"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> <span class="keyword">extends</span> <span class="title">GrandFather</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">thinking</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"i am father"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">playing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">                MethodType mt = MethodType.methodType(<span class="keyword">void</span><span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">                MethodHandle mh = lookup().findSpecial(GrandFather.class,"playing", mt, getClass());</span><br><span class="line">                <span class="comment">//MethodHandle mh = lookup().findSpecial(Father.class, "playing", mt, getClass()); 这里把GrandFather.class 换成 Father.class 同样成立</span></span><br><span class="line">                mh.invoke(<span class="keyword">this</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        (<span class="keyword">new</span> Test().<span class="keyword">new</span> Son()).playing();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h3><p>在学习<code>深入理解java虚拟机&lt;周志明&gt;第三版</code>时，关于动态分派的问题做了相关的实验，其中有一个实验得出来与作者不一致的结果。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/10/%E8%99%9A%E6%8B%9F%E6%9C%BAMethodHandle%E4%B8%AD%E5%85%B3%E4%BA%8EfindSpecial%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<p>输出结果：<code>i am grandfather, and i am playing</code></p>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2020/01/09/%E7%AE%97%E6%B3%95%E4%B9%8B-%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/09/%E7%AE%97%E6%B3%95%E4%B9%8B-%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="post-title-link" itemprop="url">算法之-并查集</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-09 11:22:01" itemprop="dateCreated datePublished" datetime="2020-01-09T11:22:01+08:00">2020-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:31" itemprop="dateModified" datetime="2020-02-28T14:16:31+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Leetcode200岛屿数量之并查集法"><a href="#Leetcode200岛屿数量之并查集法" class="headerlink" title="Leetcode200岛屿数量之并查集法"></a><strong>Leetcode200岛屿数量之并查集法</strong></h2><p>最后修改时间: 2020-01-09 11:30:15</p>
+<hr>
+<p>这道题可以使用DFS、BFS来解决，不过看题解学习到了一个厉害的算法，在这里记录一下利用此算法解决岛屿数量的code
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/01/09/%E7%AE%97%E6%B3%95%E4%B9%8B-%E5%B9%B6%E6%9F%A5%E9%9B%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/12/25/Hadoop%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%B8%AA%E7%AE%80%E7%95%A5%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/25/Hadoop%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%B8%AA%E7%AE%80%E7%95%A5%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" class="post-title-link" itemprop="url">Hadoop学习的一个简略的思维导图</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-25 16:00:00" itemprop="dateCreated datePublished" datetime="2019-12-25T16:00:00+08:00">2019-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:23" itemprop="dateModified" datetime="2020-02-28T14:16:23+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Hadoop学习笔记之思维导图"><a href="#Hadoop学习笔记之思维导图" class="headerlink" title="Hadoop学习笔记之思维导图"></a><strong>Hadoop学习笔记之思维导图</strong></h2><p>最后修改时间: 2019-12-25 16:10:20</p>
+<hr>
+<p>好久不见，最近迎来了考试月，都没有空理一下我这个可怜的小窝了。于是今天抽空过来灌一波水 XD。内容很简单，如标题所说，就是一个简洁的hadoop知识点的思维导图
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/25/Hadoop%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%B8%AA%E7%AE%80%E7%95%A5%E7%9A%84%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/" class="post-title-link" itemprop="url">Spring学习笔记02</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-12 16:55:05" itemprop="dateCreated datePublished" datetime="2019-11-12T16:55:05+08:00">2019-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:18" itemprop="dateModified" datetime="2020-02-28T14:16:18+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Spring学习笔记02-–-Spring注解学习总结"><a href="#Spring学习笔记02-–-Spring注解学习总结" class="headerlink" title="Spring学习笔记02 – Spring注解学习总结"></a><strong>Spring学习笔记02 – Spring注解学习总结</strong></h2><p>最后修改时间: 2019-11-12 17:47:30</p>
+<hr>
+<p>之前我使用过的印象深刻的注解可能只有一个<code>@OverWrite</code>了，学习Spring一下子接触了好些个注解，这里记录一下，以便温习。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" class="post-title-link" itemprop="url">Spring学习笔记01</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-12 15:49:58" itemprop="dateCreated datePublished" datetime="2019-11-12T15:49:58+08:00">2019-11-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:19" itemprop="dateModified" datetime="2020-02-28T14:16:19+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Spring学习笔记01-–-Spring容器的初始化"><a href="#Spring学习笔记01-–-Spring容器的初始化" class="headerlink" title="Spring学习笔记01 – Spring容器的初始化"></a><strong>Spring学习笔记01 – Spring容器的初始化</strong></h2><p>最后修改时间: 2019-11-12 16:41:30</p>
+<hr>
+<p>Spring容器是一个帮助我们自动初始化对象的工具，当容器初始化完成后，就可以在容器中取出我们所需要的对象。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">hadoop环境搭建记录和map/reduce使用记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-28 22:25:48" itemprop="dateCreated datePublished" datetime="2019-10-28T22:25:48+08:00">2019-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:28" itemprop="dateModified" datetime="2020-02-28T14:16:28+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="hadoop环境搭建记录和map-reduce的使用记录"><a href="#hadoop环境搭建记录和map-reduce的使用记录" class="headerlink" title="hadoop环境搭建记录和map/reduce的使用记录"></a><strong>hadoop环境搭建记录和map/reduce的使用记录</strong></h2><p>最后修改时间: 2019-10-28 22:25:48</p>
+<hr>
+<p>这个学期上了Hadoop大数据的课，却一直还没有好好的去实践这些知识，总算，做完实验，腾出了时间记录一下自己的hadoop环境的搭建过程，以及自己所遇到的一些问题。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">关于java的Matcher.matches()和find()调试记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-16 20:19:38" itemprop="dateCreated datePublished" datetime="2019-10-16T20:19:38+08:00">2019-10-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:32" itemprop="dateModified" datetime="2020-02-28T14:16:32+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Java中-Matcher-matches-和-Matcher-find-的问题记录"><a href="#Java中-Matcher-matches-和-Matcher-find-的问题记录" class="headerlink" title="Java中 Matcher matches() 和 Matcher find()的问题记录"></a><strong>Java中 Matcher matches() 和 Matcher find()的问题记录</strong></h2><p>最后修改时间: 2019-10-16 20:19:38</p>
+<hr>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p>今天用adb做手机应用是否安装的检测的时候，使用到了正则表达式。测试的时候发现java的正则匹配有些问题。我用在线匹配工具匹配的时候能够正常匹配，但是使用java正则匹配方法的时候却无法匹配。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">nexus-6P升级到Android-8.0的问题及解决记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-08 10:26:36" itemprop="dateCreated datePublished" datetime="2019-10-08T10:26:36+08:00">2019-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:19" itemprop="dateModified" datetime="2020-02-28T14:16:19+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="nexus-6P升级到Android-8-0的问题及解决记录"><a href="#nexus-6P升级到Android-8-0的问题及解决记录" class="headerlink" title="nexus-6P升级到Android-8.0的问题及解决记录"></a><strong>nexus-6P升级到Android-8.0的问题及解决记录</strong></h2><p>最后修改时间: 2019-10-16 20:33:00</p>
+<hr>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p>最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" class="post-title-link" itemprop="url">xml学习笔记(3)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-28 17:28:37" itemprop="dateCreated datePublished" datetime="2019-09-28T17:28:37+08:00">2019-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:11" itemprop="dateModified" datetime="2020-02-28T14:16:11+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="XML学习笔记（3）–-Schema的验证方法-接（2）"><a href="#XML学习笔记（3）–-Schema的验证方法-接（2）" class="headerlink" title="XML学习笔记（3）– Schema的验证方法 接（2）"></a><strong>XML学习笔记（3）– Schema的验证方法 接（2）</strong></h2><p>最后修改时间: 2019-10-16 20:30:00</p>
+<hr>
+<h3 id="3-XML的Schema验证方法"><a href="#3-XML的Schema验证方法" class="headerlink" title="3. XML的Schema验证方法"></a><strong>3. XML的Schema验证方法</strong></h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xin98.github.io/2019/09/27/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/27/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/" class="post-title-link" itemprop="url">xml学习笔记(2)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-27 10:35:56" itemprop="dateCreated datePublished" datetime="2019-09-27T10:35:56+08:00">2019-09-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 14:16:16" itemprop="dateModified" datetime="2020-02-28T14:16:16+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="XML学习笔记-2-–-XML语法的DTD的验证方法"><a href="#XML学习笔记-2-–-XML语法的DTD的验证方法" class="headerlink" title="XML学习笔记(2) – XML语法的DTD的验证方法"></a><strong>XML学习笔记(2) – XML语法的DTD的验证方法</strong></h2><p>最后修改时间: 2019-10-16 20:27:00</p>
+<hr>
+<h3 id="1-XML-的正确规则"><a href="#1-XML-的正确规则" class="headerlink" title="1. XML 的正确规则"></a><strong>1. XML 的正确规则</strong></h3><ul>
+<li>XML 文档必须要有根标签</li>
+<li>XML 文档必须要有关闭标签</li>
+<li>XML 文档的标签必须要正确的嵌套</li>
+<li>XML 文档的属性值必须要用引号括起来</li>
+<li>XML 文档的标签大小写必须一致
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/27/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -269,7 +1020,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
