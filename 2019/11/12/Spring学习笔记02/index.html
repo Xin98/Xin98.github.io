@@ -509,8 +509,9 @@
     function addCount(Counter) {
       var visitors = document.querySelector('.leancloud_visitors');
       var url = decodeURI(visitors.getAttribute('id'));
-      var title = visitors.getAttribute('data-flag-title');
-      Counter('get', `/classes/Counter?where=${encodeURIComponent(JSON.stringify({ url }))}&limit=1`)
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
@@ -540,7 +541,7 @@
         return decodeURI(element.getAttribute('id'));
       });
 
-      Counter('get', `?where=${encodeURIComponent(JSON.stringify({ url: { '$in': entries } }))}`)
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length === 0) {
@@ -571,7 +572,7 @@
     .then(({ api_server }) => {
       var Counter = (method, url, data) => {
         return fetch(`https://${api_server}/1.1${url}`, {
-          method: method,
+          method,
           headers: {
             'X-LC-Id'     : 'CpgQzKuDd4OBy4JYtyyhzoEO-gzGzoHsz',
             'X-LC-Key'    : 'kB4dYlOYFD60vDOiHX76i5aX',
@@ -588,7 +589,6 @@
       }
     });
   </script>
-
 
       </div>
     </footer>
