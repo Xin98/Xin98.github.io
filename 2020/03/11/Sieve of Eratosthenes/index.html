@@ -20,16 +20,20 @@
     var CONFIG = {"hostname":"xingao98.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Xin Coding">
-<meta property="og:url" content="https://xingao98.top/tags/xml%E7%AC%94%E8%AE%B0/index.html">
+  <meta name="description" content="LeetCode 204. 计数质数问题描述统计所有小于非负整数 n 的质数的数量。 示例:  输入: 10输出: 4解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7。  思路最简单的思路就是用暴力法，检测每一个数是否为质数，然后再计数。这种方法会用到二重循环，时间复杂度为O(n^2)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode-高效找质数之埃拉托斯特尼筛法(Sieve of Eratosthenes)">
+<meta property="og:url" content="https://xingao98.top/2020/03/11/Sieve%20of%20Eratosthenes/index.html">
 <meta property="og:site_name" content="Xin Coding">
+<meta property="og:description" content="LeetCode 204. 计数质数问题描述统计所有小于非负整数 n 的质数的数量。 示例:  输入: 10输出: 4解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7。  思路最简单的思路就是用暴力法，检测每一个数是否为质数，然后再计数。这种方法会用到二重循环，时间复杂度为O(n^2)。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-11T02:53:25.000Z">
+<meta property="article:modified_time" content="2020-03-11T03:17:09.439Z">
 <meta property="article:author" content="XinGao">
-<meta property="article:tag" content="学习记录 生活">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xingao98.top/tags/xml%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="https://xingao98.top/2020/03/11/Sieve%20of%20Eratosthenes/">
 
 
 <script id="page-configurations">
@@ -37,11 +41,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>标签: xml笔记 | Xin Coding</title>
+  <title>leetcode-高效找质数之埃拉托斯特尼筛法(Sieve of Eratosthenes) | Xin Coding</title>
   
 
 
@@ -170,94 +174,157 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">xml笔记
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2020/03/11/Sieve%20of%20Eratosthenes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xin Coding">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          leetcode-高效找质数之埃拉托斯特尼筛法(Sieve of Eratosthenes)
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-11 10:53:25 / 修改时间：11:17:09" itemprop="dateCreated datePublished" datetime="2020-03-11T10:53:25+08:00">2020-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/%E8%B4%A8%E6%95%B0/" itemprop="url" rel="index"><span itemprop="name">质数</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/03/11/Sieve%20of%20Eratosthenes/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode-高效找质数之埃拉托斯特尼筛法(Sieve of Eratosthenes)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/11/Sieve%20of%20Eratosthenes/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/11/Sieve%20of%20Eratosthenes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>568</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-09-28T17:28:37+08:00"
-              content="2019-09-28">
-          09-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" itemprop="url">
-            <span itemprop="name">xml学习笔记(3)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-09-27T10:35:56+08:00"
-              content="2019-09-27">
-          09-27
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/09/27/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/" itemprop="url">
-            <span itemprop="name">xml学习笔记(2)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-09-25T14:46:30+08:00"
-              content="2019-09-25">
-          09-25
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/09/25/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1/" itemprop="url">
-            <span itemprop="name">XML学习笔记(1)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+        <h2 id="LeetCode-204-计数质数"><a href="#LeetCode-204-计数质数" class="headerlink" title="LeetCode 204. 计数质数"></a><strong>LeetCode 204. 计数质数</strong></h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>统计所有小于非负整数 n 的质数的数量。</p>
+<p>示例:</p>
+<blockquote>
+<p>输入: 10<br>输出: 4<br>解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7。</p>
+</blockquote>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>最简单的思路就是用暴力法，检测每一个数是否为质数，然后再计数。这种方法会用到二重循环，时间复杂度为O(n^2)。  <a id="more"></a></p>
+<p>一个高效的算法，埃拉托斯特尼筛法，它的思想是：<br>每找到一个素数，那么可以标记可以被该素数整除的所有数为非素数(合数)。  </p>
+<p>利用该思想，我们可以定义一个数组用来保存数的类型(是否为素数)。</p>
+<h3 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//eratosthenes 筛法</span></span><br><span class="line">        <span class="keyword">bool</span> not_prime[n+<span class="number">1</span>] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(not_prime[i]) <span class="keyword">continue</span>;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="comment">//这里之所以是从i * i开始， 因为如果 j &lt; i, 那么 j * i在之前已经被处理过了。</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">long</span> j = (<span class="keyword">long</span>)i * i; j &lt; n; j += i)&#123;</span><br><span class="line">                not_prime[j] = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_reward.png" alt="XinGao 微信支付">
+        <p>微信支付</p>
+      </div>
+
   </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/LeetCode-%E8%B4%AA%E5%BF%83-1/" rel="prev" title="LeetCode-贪心(1)">
+      <i class="fa fa-chevron-left"></i> LeetCode-贪心(1)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -304,6 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode-204-计数质数"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 204. 计数质数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coding"><span class="nav-number">1.3.</span> <span class="nav-text">Coding</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
