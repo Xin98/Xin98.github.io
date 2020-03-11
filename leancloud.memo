@@ -14,4 +14,5 @@
 {"title":"虚拟机MethodHandle中关于findSpecial的问题记录","url":"/2020/01/10/虚拟机MethodHandle中关于findSpecial的问题记录/"},
 {"title":"使用随机数计算圆周率","url":"/2020/03/04/使用随机数计算圆周率/"},
 {"title":"LeetCode-贪心(1)","url":"/2020/03/09/LeetCode-贪心-1/"},
+{"title":"leetcode-高效找质数之埃拉托斯特尼筛法(Sieve of Eratosthenes)","url":"/2020/03/11/Sieve of Eratosthenes/"},
 ]
