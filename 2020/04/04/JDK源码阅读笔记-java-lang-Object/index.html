@@ -19,20 +19,20 @@
     var CONFIG = {"hostname":"xingao98.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="XML学习笔记（3）– Schema的验证方法 接（2） 3. XML的Schema验证方法">
+  <meta name="description" content="介绍Object类是所有java类的共同祖先，jdk的源码阅读就从他开始吧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xml学习笔记(3)">
-<meta property="og:url" content="https://xingao98.top/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/index.html">
+<meta property="og:title" content="JDK源码阅读笔记--java.lang.Object">
+<meta property="og:url" content="https://xingao98.top/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/index.html">
 <meta property="og:site_name" content="Xin Coding">
-<meta property="og:description" content="XML学习笔记（3）– Schema的验证方法 接（2） 3. XML的Schema验证方法">
+<meta property="og:description" content="介绍Object类是所有java类的共同祖先，jdk的源码阅读就从他开始吧。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-09-28T09:28:37.000Z">
-<meta property="article:modified_time" content="2020-02-28T06:20:07.386Z">
+<meta property="article:published_time" content="2020-04-04T09:02:41.000Z">
+<meta property="article:modified_time" content="2020-04-04T09:33:30.486Z">
 <meta property="article:author" content="XinGao">
-<meta property="article:tag" content="xml笔记">
+<meta property="article:tag" content="JDK">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xingao98.top/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/">
+<link rel="canonical" href="https://xingao98.top/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>xml学习笔记(3) | Xin Coding</title>
+  <title>JDK源码阅读笔记--java.lang.Object | Xin Coding</title>
   
 
 
@@ -178,7 +178,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/">
+    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          xml学习笔记(3)
+          JDK源码阅读笔记--java.lang.Object
         </h1>
 
         <div class="post-meta">
@@ -200,28 +200,22 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-09-28 17:28:37" itemprop="dateCreated datePublished" datetime="2019-09-28T17:28:37+08:00">2019-09-28</time>
+              <time title="创建时间：2020-04-04 17:02:41 / 修改时间：17:33:30" itemprop="dateCreated datePublished" datetime="2020-04-04T17:02:41+08:00">2020-04-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-28 14:20:07" itemprop="dateModified" datetime="2020-02-28T14:20:07+08:00">2020-02-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                  <a href="/categories/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">JDK源码阅读</span></a>
                 </span>
             </span>
 
           
-            <span id="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" class="post-meta-item leancloud_visitors" data-flag-title="xml学习笔记(3)" title="阅读次数">
+            <span id="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/" class="post-meta-item leancloud_visitors" data-flag-title="JDK源码阅读笔记--java.lang.Object" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -236,8 +230,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -247,14 +241,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>42</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -266,8 +260,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="XML学习笔记（3）–-Schema的验证方法-接（2）"><a href="#XML学习笔记（3）–-Schema的验证方法-接（2）" class="headerlink" title="XML学习笔记（3）– Schema的验证方法 接（2）"></a><strong>XML学习笔记（3）– Schema的验证方法 接（2）</strong></h2><hr>
-<h3 id="3-XML的Schema验证方法"><a href="#3-XML的Schema验证方法" class="headerlink" title="3. XML的Schema验证方法"></a><strong>3. XML的Schema验证方法</strong></h3><a id="more"></a>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Object类是所有java类的共同祖先，jdk的源码阅读就从他开始吧。</p>
+<a id="more"></a>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="特殊native方法"><a href="#特殊native方法" class="headerlink" title="特殊native方法"></a>特殊native方法</h3><h4 id="registerNatives"><a href="#registerNatives" class="headerlink" title="registerNatives()"></a><strong><em>registerNatives()</em></strong></h4><p>它是一个native方法，用来注册object类中的所有的native方法，使得其他native方法可以直接被用户所调用，在Object类加载的时候，静态代码块默认执行了这个方法。它不能被用户所调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">registerNatives</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">	registerNatives();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object中的native方法"><a href="#Object中的native方法" class="headerlink" title="Object中的native方法"></a>Object中的native方法</h3><h4 id="getClass"><a href="#getClass" class="headerlink" title="getClass()"></a><strong><em>getClass()</em></strong></h4><p>  获取对象所属类的class对象。  </p>
+<blockquote>
+<p>public final native Class&lt;?&gt; getClass();  </p>
+</blockquote>
+<h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a><strong><em>hashCode()</em></strong></h4><p>  计算对象的hashCode。  </p>
+<blockquote>
+<p>public native int hashCode();  </p>
+</blockquote>
+<h4 id="clone"><a href="#clone" class="headerlink" title="clone()"></a><strong><em>clone()</em></strong></h4><p>  克隆一个对象（基本数据类型会复制一份，引用类型只会复制引用，因此会有浅拷贝与深拷贝的区别）<br>  对象如果要使用<code>clone</code>方法，需要它所属的类实现了<code>Cloneable</code>接口，并重写了<code>clone</code>方法，一般是定义为<code>public</code>类型。如果没有实现该接口，就会抛出<code>CloneNotSupportedException</code>异常。  </p>
+<blockquote>
+<p>protected native Object clone() throws CloneNotSupportedException;  </p>
+</blockquote>
+<h4 id="notify"><a href="#notify" class="headerlink" title="notify()"></a><strong><em>notify()</em></strong></h4><p>  随机唤醒某个具有相同锁的对象从<code>wait</code>状态进入争锁态。如果调用<code>notify</code>的对象没有被该线程所占用（线程拥有该对象的锁）就会抛出<code>IllegalMonitorStateException</code>（RuntimeException）  </p>
+<blockquote>
+<p>public final native void notify();  </p>
+</blockquote>
+<h4 id="notifyAll"><a href="#notifyAll" class="headerlink" title="notifyAll()"></a><strong><em>notifyAll()</em></strong></h4><p>  唤醒所有具有相同锁对象的<code>wait</code>状态的线程进入争锁态，和<code>notify()</code>一样，如果没有获得调用者对象的锁也会抛出异常  </p>
+<blockquote>
+<p>public final native void notifyAll();  </p>
+</blockquote>
+<h4 id="wait-long-timeout"><a href="#wait-long-timeout" class="headerlink" title="wait(long timeout)"></a><strong><em>wait(long timeout)</em></strong></h4><p>  让该线程进入wait态，timeout后进入争锁态，如果在wait状态，其他线程执行了该线程的<code>interrupt</code>方法，会抛出<code>InterruptedException</code> 异常，timeout&lt;0会抛出<code>IllegalArgumentException</code>（RuntimeException）异常  </p>
+<blockquote>
+<p>public final native void wait(long timeout) throws InterruptedException;  </p>
+</blockquote>
+<h3 id="Object中的java方法"><a href="#Object中的java方法" class="headerlink" title="Object中的java方法"></a>Object中的java方法</h3><h4 id="equals-Object-obj"><a href="#equals-Object-obj" class="headerlink" title="equals(Object obj)"></a><strong><em>equals(Object obj)</em></strong></h4><p>  简单的比较连个对象的引用是否相同。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> ( <span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a><strong><em>toString()</em></strong></h4><p>  调用<code>System.out.println(obj);</code>实际上执行的是<code>System.out.println(obj.toString());</code>。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> getClass().getName()+<span class="string">"@"</span>+Integer.toHexString(hashCode());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="finalize"><a href="#finalize" class="headerlink" title="finalize()"></a><strong><em>finalize()</em></strong></h4><p>  与c/c++析构函数功能类似，在对象将要被清除的时候会自动调用。在垃圾回收流程中，被垃圾回收器标记需要回收后，会执行一次该方法，可用于自我拯救。该方法不建议用户使用。除了自我拯救外，可用<code>try-finally</code>完美替代该方法。    </p>
+<blockquote>
+<p>public native int hashCode();  </p>
+</blockquote>
+<h4 id="wait"><a href="#wait" class="headerlink" title="wait()"></a><strong><em>wait()</em></strong></h4><p>  永不超时，需要用notify或notifyAll 唤醒，或者在其他线程中调用该线程的interrupt方法。<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">wait(<span class="number">0L</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="wait-long-timeoutMillis-int-nanos"><a href="#wait-long-timeoutMillis-int-nanos" class="headerlink" title="wait(long timeoutMillis,int nanos)"></a><strong><em>wait(long timeoutMillis,int nanos)</em></strong></h4><p>  用于微调<code>timeoutMillis</code> , <code>nanos</code>是纳秒, 如果0&lt;=nanos&lt;=99999，timeoutMillis就会+1，否则会抛出<code>IllegalArgumentException</code>异常，同样timeout&lt;0会抛出<code>IllegalArgumentException</code>异常<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (timeout &lt; <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">                              <span class="string">"nanosecond timeout value out of range"</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (nanos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          timeout++;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      wait(timeout);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
     </div>
 
     
@@ -291,7 +322,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/xml%E7%AC%94%E8%AE%B0/" rel="tag"># xml笔记</a>
+              <a href="/tags/JDK/" rel="tag"># JDK</a>
           </div>
 
         
@@ -300,13 +331,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/09/27/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-2/" rel="prev" title="xml学习笔记(2)">
-      <i class="fa fa-chevron-left"></i> xml学习笔记(2)
+    <a href="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/" rel="prev" title="LinkedHashMap实现操作系统的LRU">
+      <i class="fa fa-chevron-left"></i> LinkedHashMap实现操作系统的LRU
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" rel="next" title="nexus-6P升级到Android-8.0的问题及解决记录">
-      nexus-6P升级到Android-8.0的问题及解决记录 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +395,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XML学习笔记（3）–-Schema的验证方法-接（2）"><span class="nav-number">1.</span> <span class="nav-text">XML学习笔记（3）– Schema的验证方法 接（2）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-XML的Schema验证方法"><span class="nav-number">1.1.</span> <span class="nav-text">3. XML的Schema验证方法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊native方法"><span class="nav-number">2.1.</span> <span class="nav-text">特殊native方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#registerNatives"><span class="nav-number">2.1.1.</span> <span class="nav-text">registerNatives()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object中的native方法"><span class="nav-number">2.2.</span> <span class="nav-text">Object中的native方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getClass"><span class="nav-number">2.2.1.</span> <span class="nav-text">getClass()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hashCode"><span class="nav-number">2.2.2.</span> <span class="nav-text">hashCode()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clone"><span class="nav-number">2.2.3.</span> <span class="nav-text">clone()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#notify"><span class="nav-number">2.2.4.</span> <span class="nav-text">notify()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#notifyAll"><span class="nav-number">2.2.5.</span> <span class="nav-text">notifyAll()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wait-long-timeout"><span class="nav-number">2.2.6.</span> <span class="nav-text">wait(long timeout)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object中的java方法"><span class="nav-number">2.3.</span> <span class="nav-text">Object中的java方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#equals-Object-obj"><span class="nav-number">2.3.1.</span> <span class="nav-text">equals(Object obj)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toString-NaN"><span class="nav-number">2.3.2.</span> <span class="nav-text">toString()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finalize"><span class="nav-number">2.3.3.</span> <span class="nav-text">finalize()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wait"><span class="nav-number">2.3.4.</span> <span class="nav-text">wait()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wait-long-timeoutMillis-int-nanos"><span class="nav-number">2.3.5.</span> <span class="nav-text">wait(long timeoutMillis,int nanos)</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
