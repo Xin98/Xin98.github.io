@@ -19,20 +19,20 @@
     var CONFIG = {"hostname":"xingao98.top","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Java中 Matcher matches() 和 Matcher find()的问题记录 背景今天用adb做手机应用是否安装的检测的时候，使用到了正则表达式。测试的时候发现java的正则匹配有些问题。我用在线匹配工具匹配的时候能够正常匹配，但是使用java正则匹配方法的时候却无法匹配。">
+  <meta name="description" content="思路：直接对每条对角线进行遍历，i代表第i行，j代表第j列, k代表着第几条对角线。主要分为两种情况:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于java的Matcher.matches()和find()调试记录">
-<meta property="og:url" content="https://xingao98.top/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="LeetCode-对角线遍历">
+<meta property="og:url" content="https://xingao98.top/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/index.html">
 <meta property="og:site_name" content="Xin Coding">
-<meta property="og:description" content="Java中 Matcher matches() 和 Matcher find()的问题记录 背景今天用adb做手机应用是否安装的检测的时候，使用到了正则表达式。测试的时候发现java的正则匹配有些问题。我用在线匹配工具匹配的时候能够正常匹配，但是使用java正则匹配方法的时候却无法匹配。">
+<meta property="og:description" content="思路：直接对每条对角线进行遍历，i代表第i行，j代表第j列, k代表着第几条对角线。主要分为两种情况:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-10-16T12:19:38.000Z">
-<meta property="article:modified_time" content="2020-02-28T06:20:16.209Z">
+<meta property="article:published_time" content="2020-04-08T03:57:18.000Z">
+<meta property="article:modified_time" content="2020-04-08T03:58:30.053Z">
 <meta property="article:author" content="XinGao">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="学习记录 生活">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xingao98.top/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="https://xingao98.top/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>关于java的Matcher.matches()和find()调试记录 | Xin Coding</title>
+  <title>LeetCode-对角线遍历 | Xin Coding</title>
   
 
 
@@ -178,7 +178,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          关于java的Matcher.matches()和find()调试记录
+          LeetCode-对角线遍历
         </h1>
 
         <div class="post-meta">
@@ -200,28 +200,22 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-10-16 20:19:38" itemprop="dateCreated datePublished" datetime="2019-10-16T20:19:38+08:00">2019-10-16</time>
+              <time title="创建时间：2020-04-08 11:57:18 / 修改时间：11:58:30" itemprop="dateCreated datePublished" datetime="2020-04-08T11:57:18+08:00">2020-04-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-28 14:20:16" itemprop="dateModified" datetime="2020-02-28T14:20:16+08:00">2020-02-28</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
             </span>
 
           
-            <span id="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="关于java的Matcher.matches()和find()调试记录" title="阅读次数">
+            <span id="/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/" class="post-meta-item leancloud_visitors" data-flag-title="LeetCode-对角线遍历" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -236,8 +230,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/08/LeetCode-%E5%AF%B9%E8%A7%92%E7%BA%BF%E9%81%8D%E5%8E%86/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -266,27 +260,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Java中-Matcher-matches-和-Matcher-find-的问题记录"><a href="#Java中-Matcher-matches-和-Matcher-find-的问题记录" class="headerlink" title="Java中 Matcher matches() 和 Matcher find()的问题记录"></a><strong>Java中 Matcher matches() 和 Matcher find()的问题记录</strong></h2><hr>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p>今天用adb做手机应用是否安装的检测的时候，使用到了正则表达式。测试的时候发现java的正则匹配有些问题。我用在线匹配工具匹配的时候能够正常匹配，但是使用java正则匹配方法的时候却无法匹配。<a id="more"></a></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a><strong>问题</strong></h3><p>首先看一段代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"package:nbc.dianfeng.online\r\n"</span>;</span><br><span class="line">System.out.println(str.matches(<span class="string">".*dianfeng.*"</span>)); <span class="comment">//false ???</span></span><br></pre></td></tr></table></figure>
+        <h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>直接对每条对角线进行遍历，i代表第i行，j代表第j列, k代表着第几条对角线。<br>主要分为两种情况:<a id="more"></a>  </p>
+<ol>
+<li><p>对角线方向是从左下到右上(k % 2 == 0, 用位操作就是 (k &amp; 1) == 0)  </p>
+<ul>
+<li>坐标遍历顺序为(i, j) -&gt; (i-1, j+1)  </li>
+<li>终止条件: i &lt; 0 (i 小于最小行号) || j &gt;= n (j 超过最大列号)</li>
+</ul>
+</li>
+<li><p>对角线方向是从右上到左下(k % 2 == 1)  </p>
+<ul>
+<li>坐标遍历顺序为(i, j) -&gt; (i+1, j-1)  </li>
+<li>终止条件: i &gt;= n (i 超过最大行号) || j &lt; 0 (j 小于最小列号)  </li>
+</ul>
+</li>
+</ol>
+<p>遍历顺序确认后，如何确定每次遍历的开始坐标？我们以左下到右上的对角线遍历为例:<br>例如，现在是第2条对角线遍历(k = 2), 分为两种情况:</p>
+<ul>
+<li>k &lt; m(最大行号)<br>显然，我们直接取开始坐标为(k, 0)即可  </li>
+<li>k &gt;= m<br>这个时候，因为k已经超过了行号，我们需要将开始坐标从(m-1, 0) 往右移动 k - (m - 1)个单位， 所以现在的开始坐标为:<br>(m-1, k - m + 1)。例如：在下面的矩阵中，若k = 4: 我们的开始坐标就是(3, 1) 即14所在的位置。<pre>
+1  2  3  4
+5  6  7  8
+9  10 11 12
+13 14 15 16
+</pre>
 
-<p>上面第二行等价于</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pattern p = Pattern.compile(<span class="string">"(.*)dianfeng(.*)"</span>);</span><br><span class="line">Matcher m = p.matcher(str);</span><br><span class="line">System.out.println(m.matches()); <span class="comment">//false ???</span></span><br></pre></td></tr></table></figure>
 
-<p>正常来说上面的结果应该是true，我使用了在线测试工具测试了一下，得到了true结果。郁闷…</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a><strong>解决</strong></h3><p>于是我改写了一下，利用Matcher find()方法测试了一下。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pattern p = Pattern.compile(<span class="string">"(.*)dianfeng(.*)"</span>);</span><br><span class="line">Matcher m = p.matcher(str);</span><br><span class="line">System.out.println(m.matches()); <span class="comment">//false </span></span><br><span class="line">m.reset(); <span class="comment">//matchers()方法会改变Matcher对象的状态，通过reset()方法重置Matcher对象的状态</span></span><br><span class="line">System.out.println(m.find()); <span class="comment">//true</span></span><br><span class="line">System.out.println(m.find(<span class="number">0</span>)); <span class="comment">//true 与上两行等价</span></span><br></pre></td></tr></table></figure>
-
-<p>而这里find方法却能成功匹配。我删除了<code>str</code>中的<code>\r\n</code>后，matches也能成功匹配了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"package:nbc.dianfeng.online"</span>;</span><br><span class="line">System.out.println(str.matches(<span class="string">".*dianfeng.*"</span>)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-<p>难道matches是不能够匹配<code>\r\n</code>吗？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"\r\n"</span>.matches(<span class="string">".*"</span>)); <span class="comment">//false ???</span></span><br></pre></td></tr></table></figure>
-
-<p>一段时间后……我找出了可以匹配的表达式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"\r\n"</span>.matches(<span class="string">"[\\r\\n]*"</span>)); <span class="comment">//true</span></span><br><span class="line">System.out.println(<span class="string">"\r\n"</span>.matches(<span class="string">"[\\s]*"</span>)); <span class="comment">//true 竟然也可以</span></span><br></pre></td></tr></table></figure>
-
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Q0498_Diagonal_Traverse</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] findDiagonalOrder(<span class="keyword">int</span>[][] matrix) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.length;</span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].length;</span><br><span class="line">        <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[m * n];</span><br><span class="line">        <span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; m + n - <span class="number">1</span>; k++) &#123;</span><br><span class="line">            <span class="comment">//up表示从左下到右上</span></span><br><span class="line">            <span class="keyword">boolean</span> up = (k &amp; <span class="number">1</span>) == <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//确认第k个对角线开始的坐标</span></span><br><span class="line">            <span class="keyword">int</span> i = up ? (k &lt; m ? k : m - <span class="number">1</span>) : (k &lt; n ? <span class="number">0</span> : k - n + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">int</span> j = up ? (k &lt; m ? <span class="number">0</span> : k - m + <span class="number">1</span>) : (k &lt; n ? k : n - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(up)&#123;</span><br><span class="line">                <span class="keyword">while</span>(i &gt;= <span class="number">0</span> &amp;&amp; j &lt; n)&#123;</span><br><span class="line">                    ans[idx++] = matrix[i--][j++];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">while</span>(i &lt; m &amp;&amp; j &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">                    ans[idx++] = matrix[i++][j--];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -309,9 +311,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/java/" rel="tag"># java</a>
-          </div>
 
         
 
@@ -319,13 +318,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" rel="prev" title="nexus-6P升级到Android-8.0的问题及解决记录">
-      <i class="fa fa-chevron-left"></i> nexus-6P升级到Android-8.0的问题及解决记录
+    <a href="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" rel="prev" title="LeetCode-旋转矩阵">
+      <i class="fa fa-chevron-left"></i> LeetCode-旋转矩阵
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" rel="next" title="hadoop环境搭建记录和map/reduce使用记录">
-      hadoop环境搭建记录和map/reduce使用记录 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -386,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中-Matcher-matches-和-Matcher-find-的问题记录"><span class="nav-number">1.</span> <span class="nav-text">Java中 Matcher matches() 和 Matcher find()的问题记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.3.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路："><span class="nav-number">1.</span> <span class="nav-text">思路：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
