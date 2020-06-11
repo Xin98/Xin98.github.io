@@ -786,12 +786,12 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
     });
     new Valine({
       el         : '#valine-comments',
-      verify     : false,
-      notify     : false,
+      verify     : true,
+      notify     : true,
       appId      : 'g3RAeysOzmOa4SqdhGTmwYKi-gzGzoHsz',
       appKey     : 'AeWzDNbLccyhv3jyR04OMRb6',
-      placeholder: "leave your views~",
-      avatar     : 'mm',
+      placeholder: "填写邮箱可以及时收到回复哦(●'◡'●)",
+      avatar     : 'wavatar',
       meta       : guest,
       pageSize   : '10' || 10,
       visitor    : false,
