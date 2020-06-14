@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/xin98.github.io/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/xin98.github.io/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/xin98.github.io/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/xin98.github.io/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/xin98.github.io/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/xin98.github.io/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xingao98.top","root":"/xin98.github.io/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"xingao98.gitee.io","root":"/blog/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="hadoop环境搭建记录和map&#x2F;reduce的使用记录 这个学期上了Hadoop大数据的课，却一直还没有好好的去实践这些知识，总算，做完实验，腾出了时间记录一下自己的hadoop环境的搭建过程，以及自己所遇到的一些问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hadoop环境搭建记录和map&#x2F;reduce使用记录">
-<meta property="og:url" content="https://xingao98.top/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:url" content="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="学习中的阿Xin">
 <meta property="og:description" content="hadoop环境搭建记录和map&#x2F;reduce的使用记录 这个学期上了Hadoop大数据的课，却一直还没有好好的去实践这些知识，总算，做完实验，腾出了时间记录一下自己的hadoop环境的搭建过程，以及自己所遇到的一些问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/master_ip.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/master_ip.png">
 <meta property="article:published_time" content="2019-10-28T14:25:48.000Z">
 <meta property="article:modified_time" content="2020-02-28T06:20:14.416Z">
 <meta property="article:author" content="XinGao">
@@ -36,9 +36,9 @@
 <meta property="article:tag" content="虚拟机">
 <meta property="article:tag" content="map&#x2F;reduce">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xingao98.top/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png">
+<meta name="twitter:image" content="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png">
 
-<link rel="canonical" href="https://xingao98.top/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -100,7 +100,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/xin98.github.io/" class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">学习中的阿Xin</span>
         <span class="logo-line-after"><i></i></span>
@@ -122,12 +122,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/xin98.github.io/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/xin98.github.io/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -184,10 +184,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://xingao98.gitee.io/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/xin98.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
       <meta itemprop="name" content="XinGao">
       <meta itemprop="description" content="">
     </span>
@@ -222,16 +222,16 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/xin98.github.io/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                  <a href="/blog/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/xin98.github.io/categories/%E5%AD%A6%E4%B9%A0/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+                  <a href="/blog/categories/%E5%AD%A6%E4%B9%A0/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
                 </span>
             </span>
 
           
-            <span id="/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="hadoop环境搭建记录和map/reduce使用记录" title="阅读次数">
+            <span id="/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="hadoop环境搭建记录和map/reduce使用记录" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -246,8 +246,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    <a title="valine" href="/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -295,7 +295,7 @@
 <li>hadoop版本: 2.7.3 <a href="http://apache.claz.org/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz" target="_blank" rel="noopener">下载地址</a></li>
 </ul>
 <p>如果大家按照我的配置去搭建环境，至少需要8G以上的内存才能跑起来，所以对大家的物理计算机配置要求有点高。<strong>建议</strong>: 如果你的计算机是8G内存，请将虚拟机内存设置为1G，或者使用3台虚拟机的 1 + 2 架构。</p>
-<img src="/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png" class="" title="系统信息">
+<img src="/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/system_info.png" class="" title="系统信息">
 
 <h3 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a><strong>环境设置</strong></h3><p>注意: 打开终端后，所有操作请切换到root用户。</p>
 <blockquote>
@@ -372,7 +372,7 @@
 <blockquote>
 <p><code>ifconfig</code></p>
 </blockquote>
-<img src="/xin98.github.io/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/master_ip.png" class="" title="master ip地址">
+<img src="/blog/2019/10/28/hadoop%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95%E5%92%8Cmap-reduce%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/master_ip.png" class="" title="master ip地址">
 
 <ul>
 <li><p>hosts修改</p>
@@ -477,7 +477,7 @@
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="/xin98.github.io/images/wechat_reward.png" alt="XinGao 微信支付">
+        <img src="/blog/images/wechat_reward.png" alt="XinGao 微信支付">
         <p>微信支付</p>
       </div>
 
@@ -487,10 +487,10 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/xin98.github.io/tags/hadoop/" rel="tag"># hadoop</a>
-              <a href="/xin98.github.io/tags/java/" rel="tag"># java</a>
-              <a href="/xin98.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
-              <a href="/xin98.github.io/tags/map-reduce/" rel="tag"># map/reduce</a>
+              <a href="/blog/tags/hadoop/" rel="tag"># hadoop</a>
+              <a href="/blog/tags/java/" rel="tag"># java</a>
+              <a href="/blog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
+              <a href="/blog/tags/map-reduce/" rel="tag"># map/reduce</a>
           </div>
 
         
@@ -499,11 +499,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/xin98.github.io/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" rel="prev" title="关于java的Matcher.matches()和find()调试记录">
+    <a href="/blog/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" rel="prev" title="关于java的Matcher.matches()和find()调试记录">
       <i class="fa fa-chevron-left"></i> 关于java的Matcher.matches()和find()调试记录
     </a></div>
       <div class="post-nav-item">
-    <a href="/xin98.github.io/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" rel="next" title="Spring学习笔记01">
+    <a href="/blog/2019/11/12/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001/" rel="next" title="Spring学习笔记01">
       Spring学习笔记01 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -578,19 +578,19 @@
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/xin98.github.io/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/xin98.github.io/categories/">
+            <a href="/blog/categories/">
         <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/xin98.github.io/tags/">
+            <a href="/blog/tags/">
         <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -601,7 +601,7 @@
         <a href="https://github.com/Xin98" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Xin98" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/xin98.github.io/emgaox@163.com" title="E-Mail → emgaox@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/blog/emgaox@163.com" title="E-Mail → emgaox@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -743,19 +743,19 @@
   </div>
 
   
-  <script src="/xin98.github.io/lib/anime.min.js"></script>
-  <script src="/xin98.github.io/lib/velocity/velocity.min.js"></script>
-  <script src="/xin98.github.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/xin98.github.io/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/xin98.github.io/js/motion.js"></script>
-
-
-<script src="/xin98.github.io/js/schemes/pisces.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-<script src="/xin98.github.io/js/next-boot.js"></script>
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
 
 
 
@@ -777,7 +777,7 @@
   
 <script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/xin98.github.io/js/algolia-search.js"></script>
+<script src="/blog/js/algolia-search.js"></script>
 
 
 

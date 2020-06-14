@@ -5,41 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/xin98.github.io/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/xin98.github.io/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/xin98.github.io/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/xin98.github.io/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/xin98.github.io/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/xin98.github.io/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css">
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xingao98.top","root":"/xin98.github.io/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"xingao98.gitee.io","root":"/blog/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":{"valine":{"order":1},"disqus":{"order":2}},"activeClass":"valine"},"algolia":{"appID":"ZZCDHTX1MM","apiKey":"36f19fa2072760c9682b903d9f151086","indexName":"xin_search","hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="nexus-6P升级到Android-8.0的问题及解决记录 背景最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nexus-6P升级到Android-8.0的问题及解决记录">
-<meta property="og:url" content="https://xingao98.top/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:url" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="学习中的阿Xin">
 <meta property="og:description" content="nexus-6P升级到Android-8.0的问题及解决记录 背景最近在做一个实验室的项目，需要用到nexus6P手机，考虑到nexus6P手机的系统版本过低，所以老师要求我们将手机的系统升级到较高的版本。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png">
-<meta property="og:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png">
+<meta property="og:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png">
 <meta property="article:published_time" content="2019-10-08T02:26:36.000Z">
 <meta property="article:modified_time" content="2020-02-28T06:20:13.409Z">
 <meta property="article:author" content="XinGao">
 <meta property="article:tag" content="nexus6P">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xingao98.top/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
+<meta name="twitter:image" content="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png">
 
-<link rel="canonical" href="https://xingao98.top/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -101,7 +101,7 @@
   <div class="site-meta">
 
     <div>
-      <a href="/xin98.github.io/" class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">学习中的阿Xin</span>
         <span class="logo-line-after"><i></i></span>
@@ -123,12 +123,12 @@
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/xin98.github.io/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/xin98.github.io/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -185,10 +185,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xingao98.top/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://xingao98.gitee.io/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/xin98.github.io/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
       <meta itemprop="name" content="XinGao">
       <meta itemprop="description" content="">
     </span>
@@ -223,12 +223,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/xin98.github.io/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
+                  <a href="/blog/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
                 </span>
             </span>
 
           
-            <span id="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="nexus-6P升级到Android-8.0的问题及解决记录" title="阅读次数">
+            <span id="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="nexus-6P升级到Android-8.0的问题及解决记录" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -243,8 +243,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    <a title="valine" href="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -281,20 +281,20 @@
 <ol>
 <li><p><strong>配置环境</strong></p>
 <p>将<code>platform-tools</code>的目录加入到<code>path</code>系统环境变量中，例如我的<code>platform-tools</code>在<code>C:\Users\G-Xin\Desktop\platformtools</code>下，相应的系统环境变量(path)就增加一条记录。配置完成后，你可以在任意的文件夹中使用<code>fastboot</code>及<code>adb</code>命令。</p>
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png" class="" title="环境配置">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/1.png" class="" title="环境配置">
 </li>
 <li><p><strong>准备好factory镜像</strong></p>
 <p>镜像下载: <a href="https://developers.google.cn/android/images#angler" target="_blank" rel="noopener">地址</a></p>
 <p>因为是采用fastboot升级安装方式，所以镜像的选择也非常重要，nexus6P的升级镜像有两种: 1. factory image  2. ota image。而fastboot升级方法只能选择使用factoryimage。</p>
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png" class="" title="factory images选择">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/2.png" class="" title="factory images选择">
 
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png" class="" title="nexus6P的安装包">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/3.png" class="" title="nexus6P的安装包">
 </li>
 <li><p><strong>安装</strong></p>
 <p>将下载的安装包解压到任意文件夹中。然后将imgxxxx.zip解压到当前文件夹中。</p>
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png" class="" title="factory 解压image">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/4.png" class="" title="factory 解压image">
 
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png" class="" title="factory 解压imgxxx.zip后的文件目录">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/5.png" class="" title="factory 解压imgxxx.zip后的文件目录">
 
 <p>这时候正常情况下，将手机启动到bootloader界面，然后双击<code>flash-all.bat</code>（windows下），<code>flash-all.sh</code>(linux下)即可完成安装。nexus6P启动到bootloader方法: 关机后，同时按电源键和音量下键即可进入。</p>
 </li>
@@ -307,7 +307,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash vendor vendor.img</span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
 
 <p>细心的读者可能发现了，安装目录下没有<code>cache.img</code> 和 <code>userdata.img</code>这两个文件，这是因为高版本的image里都把这两个文件给删除了。而缺少这两个文件，会导致我们前面说的，安装成功后一直卡在google logo处。如何获取这两个文件呢？很简单直接下载一个低版本的镜像，如android6.0，解压后将这两个文件复制过来即可。</p>
-<img src="/xin98.github.io/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png" class="" title="factory 安装成功结果">
+<img src="/blog/2019/10/08/nexus-6P%E5%8D%87%E7%BA%A7%E5%88%B0Android-8-0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%AE%B0%E5%BD%95/6.png" class="" title="factory 安装成功结果">
 
 
 </li>
@@ -326,7 +326,7 @@
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="/xin98.github.io/images/wechat_reward.png" alt="XinGao 微信支付">
+        <img src="/blog/images/wechat_reward.png" alt="XinGao 微信支付">
         <p>微信支付</p>
       </div>
 
@@ -336,7 +336,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/xin98.github.io/tags/nexus6P/" rel="tag"># nexus6P</a>
+              <a href="/blog/tags/nexus6P/" rel="tag"># nexus6P</a>
           </div>
 
         
@@ -345,11 +345,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/xin98.github.io/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" rel="prev" title="xml学习笔记(3)">
+    <a href="/blog/2019/09/28/xml%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3/" rel="prev" title="xml学习笔记(3)">
       <i class="fa fa-chevron-left"></i> xml学习笔记(3)
     </a></div>
       <div class="post-nav-item">
-    <a href="/xin98.github.io/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" rel="next" title="关于java的Matcher.matches()和find()调试记录">
+    <a href="/blog/2019/10/16/%E5%85%B3%E4%BA%8Ejava%E7%9A%84Matcher-matches-%E5%92%8Cfind-%E8%B0%83%E8%AF%95%E8%AE%B0%E5%BD%95/" rel="next" title="关于java的Matcher.matches()和find()调试记录">
       关于java的Matcher.matches()和find()调试记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -424,19 +424,19 @@
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/xin98.github.io/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/xin98.github.io/categories/">
+            <a href="/blog/categories/">
         <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/xin98.github.io/tags/">
+            <a href="/blog/tags/">
         <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -447,7 +447,7 @@
         <a href="https://github.com/Xin98" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Xin98" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/xin98.github.io/emgaox@163.com" title="E-Mail → emgaox@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="/blog/emgaox@163.com" title="E-Mail → emgaox@163.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
   </div>
 
@@ -589,19 +589,19 @@
   </div>
 
   
-  <script src="/xin98.github.io/lib/anime.min.js"></script>
-  <script src="/xin98.github.io/lib/velocity/velocity.min.js"></script>
-  <script src="/xin98.github.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/xin98.github.io/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/xin98.github.io/js/motion.js"></script>
-
-
-<script src="/xin98.github.io/js/schemes/pisces.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-<script src="/xin98.github.io/js/next-boot.js"></script>
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
 
 
 
@@ -623,7 +623,7 @@
   
 <script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 <script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/xin98.github.io/js/algolia-search.js"></script>
+<script src="/blog/js/algolia-search.js"></script>
 
 
 
