@@ -199,7 +199,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-14 11:07:53 / 修改时间：18:06:11" itemprop="dateCreated datePublished" datetime="2021-04-14T11:07:53+08:00">2021-04-14</time>
+              <time title="创建时间：2021-04-14 11:07:53 / 修改时间：18:19:01" itemprop="dateCreated datePublished" datetime="2021-04-14T11:07:53+08:00">2021-04-14</time>
             </span>
 
           
@@ -306,7 +306,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-06 10:35:25" itemprop="dateModified" datetime="2021-03-06T10:35:25+08:00">2021-03-06</time>
+                <time title="修改时间：2021-04-14 18:10:23" itemprop="dateModified" datetime="2021-04-14T18:10:23+08:00">2021-04-14</time>
               </span>
 
           
@@ -336,7 +336,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>745</span>
+              <span>769</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -356,31 +356,15 @@
 
       
           <hr>
-<p>主要用该博文来记录自己在毕设过程中的一些思考。</p>
-<h3 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a><strong>实验部分</strong></h3><h4 id="模型训练所需资源对比"><a href="#模型训练所需资源对比" class="headerlink" title="模型训练所需资源对比"></a><strong>模型训练所需资源对比</strong></h4><p>背景: 基于TinyTL: Reduce Memory, Not Parameters for Efficient On-Device Learning 论文</p>
-<ol>
-<li><p>tiny net 在batch size 为512 只占用5000MB的显存，而Proxyless net 则需要15000MB(两张3090的卡同时使用时，单卡占用的显存).好处有:</p>
-<ul>
-<li>相同资源条件下，可使用更大的bsz进行训练，使得训练速度更快.</li>
-<li>小的显存占用代表着模型更小，可以部署到资源有限的边缘设备，充分利用算力.</li>
-<li>使用tiny net可以在fine tune模式下占用更小的内存（待记录实际占用显存）</li>
-</ul>
-</li>
-<li><p>之前理解的TinyNet是将原来的block修改为lite residual block，实际上，应该是在原来的每一层的模型参数保持不变的情况下，加上一个lite residual，然后在downstream 的迁移学习中使用，而freeze原来的block，来达到降低内存，提升fine tune 过程的有效性的效果。</p>
- <img src="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/1.png" class="" title="figuer1">  
-</li>
-<li><p>cifar 优化不明显的原因是因为图像大小比较小</p>
-</li>
-<li><p>resnet 没有 inverted bottleneck blocks 而 lite residual 是基于它进行的</p>
-<pre><code>利用 inverted bottleneck blocks 对resnet进行改造 然后加以利用lite residual 观察效果</code></pre></li>
-<li><p>论文的部分组织结构 可以为： 1. 模型压缩–nas + 迁移学习 + lite residual     2. 模型压缩网络结构剪枝，量化等 + 迁移学习 </p>
-</li>
-<li><p>lite_residual 的参数多于原来模型的原因是 group设置太小</p>
-</li>
-<li><p>第四章实验思路，先将训练好的模型进行量化，然后加入lite块迁移到资源受限的设备上进行训练，实验结果可以的话可以作为创新点</p>
-</li>
-</ol>
-
+<p>&emsp;&emsp;主要用该博文来记录自己在毕设过程中的一些思考。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -430,7 +414,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-08 15:09:09" itemprop="dateModified" datetime="2021-03-08T15:09:09+08:00">2021-03-08</time>
+                <time title="修改时间：2021-04-14 18:10:54" itemprop="dateModified" datetime="2021-04-14T18:10:54+08:00">2021-04-14</time>
               </span>
 
           
@@ -460,7 +444,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>321</span>
+              <span>254</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -480,28 +464,15 @@
 
       
           <hr>
-<p>主要用该博文来记录自己在毕设过程中发现的问题，以及解决方案。</p>
-<h3 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a><strong>实验部分</strong></h3><ol>
-<li><p>模型加载参数不匹配<br> 加载预训练好的模型时出现如下错误:</p>
- <img src="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/1.png" class="" title="figuer1">  
-<p> 加载的是修改后的模型参数，而模型还是proxylessnet.</p>
-</li>
-<li><p>将模型从imagenet 上训练好迁移到 cifar10等数据集上时，需要修改最后的全连接层，使得输出的维度和数据集的类别保持一致 </p>
-</li>
-<li><p>微调训练好的模型学习率需要更小，否则将会不收敛</p>
-</li>
-<li><p>lite_residual 保持固定的kernel size 需要重新计算stride 和 pad</p>
-</li>
-<li><p>在gpu3 和 gpu4 上训练的显存占用不一样 </p>
-</li>
-<li><p>断点续传有问题</p>
-</li>
-<li><p>lite residual  – bias + weight</p>
-</li>
-<li><p>nomal – bias + weight<br>(最后的全连接默认保留)<br>1) 只保留lite residual 参数 </p>
-</li>
-</ol>
-
+<p>&emsp;&emsp;主要用该博文来记录自己在毕设过程中发现的问题，以及解决方案。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -551,7 +522,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-14 18:44:59" itemprop="dateModified" datetime="2020-12-14T18:44:59+08:00">2020-12-14</time>
+                <time title="修改时间：2021-04-14 18:10:58" itemprop="dateModified" datetime="2021-04-14T18:10:58+08:00">2021-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -609,21 +580,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>&emsp;&emsp;抓住研究生的尾巴，开始了我的学术之旅~ 看论文会遇到一些个人觉得比较好的词汇以及词组，在这里记录一下，没准以后会用到呢？  </p>
-<h3 id="词组"><a href="#词组" class="headerlink" title="词组"></a>词组</h3><ul>
-<li>from scratch                  从头开始</li>
-<li>xxx-wise                      派生后缀-wise 来自古英语名词wise(方法、方式），它可以加在形容词、名词或动词后面构成方式副词，表示in a ～manner或in a ～ing manner（以…的方式）  </li>
-<li>xxx-free                      表示没有xxx  </li>
-<li>leverage                      字面意思是杠杆作用，实际应该解释为利用，更传神的说法是以小博大，Maximum Leverage（充分利用到极点）</li>
-<li>with respect to               关于,缩写w.r.t.</li>
-<li>take into account             考虑到</li>
-<li>x-fold                        x倍</li>
-<li>ingrident                     成分，可以在论述自己观点的时候作为”方面”的意思，例如two ingridents 两个方面 </li>
-<li>as per                        按照</li>
-<li>without loss of generality    不失一般性,缩写w.l.o.g. 或者 WLOG</li>
-<li>orders of magnitude           数量级</li>
-</ul>
-
+          <p>&emsp;&emsp;抓住研究生的尾巴，开始了我的学术之旅~ 看论文会遇到一些个人觉得比较好的词汇以及词组，在这里记录一下，没准以后会用到呢？
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/21/%E8%AE%BA%E6%96%87%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87%E7%A7%AF%E7%B4%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
