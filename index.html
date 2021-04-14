@@ -174,6 +174,352 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学习中的阿Xin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/" class="post-title-link" itemprop="url">几个小步骤为服务器安全保驾护航</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-14 11:07:53 / 修改时间：18:06:11" itemprop="dateCreated datePublished" datetime="2021-04-14T11:07:53+08:00">2021-04-14</time>
+            </span>
+
+          
+            <span id="/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/" class="post-meta-item leancloud_visitors" data-flag-title="几个小步骤为服务器安全保驾护航" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>&emsp;&emsp;去年接手了实验室的服务器的管理工作，当时以为是个轻松的活，机器也不会出什么大问题。直到今年年初，实验室的服务器（主要是GPU服务器）频繁的出现不能登录、登录很慢的异常情况，经过排查发现几台服务器已经病入膏肓，许多系统命令已经被hacker给替换，服务器也被别人用来挖矿了，严重的影响了我们的使用。所以这里主要是总结记录一些我所知道的加固实验室安全的方法，也欢迎大家补充。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/14/%E5%87%A0%E4%B8%AA%E5%B0%8F%E6%AD%A5%E9%AA%A4%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E4%BF%9D%E9%A9%BE%E6%8A%A4%E8%88%AA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学习中的阿Xin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">毕业设计-思考</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-26 13:31:50" itemprop="dateCreated datePublished" datetime="2021-02-26T13:31:50+08:00">2021-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 10:35:25" itemprop="dateModified" datetime="2021-03-06T10:35:25+08:00">2021-03-06</time>
+              </span>
+
+          
+            <span id="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/" class="post-meta-item leancloud_visitors" data-flag-title="毕业设计-思考" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>745</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>主要用该博文来记录自己在毕设过程中的一些思考。</p>
+<h3 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a><strong>实验部分</strong></h3><h4 id="模型训练所需资源对比"><a href="#模型训练所需资源对比" class="headerlink" title="模型训练所需资源对比"></a><strong>模型训练所需资源对比</strong></h4><p>背景: 基于TinyTL: Reduce Memory, Not Parameters for Efficient On-Device Learning 论文</p>
+<ol>
+<li><p>tiny net 在batch size 为512 只占用5000MB的显存，而Proxyless net 则需要15000MB(两张3090的卡同时使用时，单卡占用的显存).好处有:</p>
+<ul>
+<li>相同资源条件下，可使用更大的bsz进行训练，使得训练速度更快.</li>
+<li>小的显存占用代表着模型更小，可以部署到资源有限的边缘设备，充分利用算力.</li>
+<li>使用tiny net可以在fine tune模式下占用更小的内存（待记录实际占用显存）</li>
+</ul>
+</li>
+<li><p>之前理解的TinyNet是将原来的block修改为lite residual block，实际上，应该是在原来的每一层的模型参数保持不变的情况下，加上一个lite residual，然后在downstream 的迁移学习中使用，而freeze原来的block，来达到降低内存，提升fine tune 过程的有效性的效果。</p>
+ <img src="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E6%80%9D%E8%80%83/1.png" class="" title="figuer1">  
+</li>
+<li><p>cifar 优化不明显的原因是因为图像大小比较小</p>
+</li>
+<li><p>resnet 没有 inverted bottleneck blocks 而 lite residual 是基于它进行的</p>
+<pre><code>利用 inverted bottleneck blocks 对resnet进行改造 然后加以利用lite residual 观察效果</code></pre></li>
+<li><p>论文的部分组织结构 可以为： 1. 模型压缩–nas + 迁移学习 + lite residual     2. 模型压缩网络结构剪枝，量化等 + 迁移学习 </p>
+</li>
+<li><p>lite_residual 的参数多于原来模型的原因是 group设置太小</p>
+</li>
+<li><p>第四章实验思路，先将训练好的模型进行量化，然后加入lite块迁移到资源受限的设备上进行训练，实验结果可以的话可以作为创新点</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XinGao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学习中的阿Xin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">毕业设计-问题记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-26 13:26:49" itemprop="dateCreated datePublished" datetime="2021-02-26T13:26:49+08:00">2021-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-08 15:09:09" itemprop="dateModified" datetime="2021-03-08T15:09:09+08:00">2021-03-08</time>
+              </span>
+
+          
+            <span id="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="毕业设计-问题记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>321</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>主要用该博文来记录自己在毕设过程中发现的问题，以及解决方案。</p>
+<h3 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a><strong>实验部分</strong></h3><ol>
+<li><p>模型加载参数不匹配<br> 加载预训练好的模型时出现如下错误:</p>
+ <img src="/2021/02/26/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1-%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/1.png" class="" title="figuer1">  
+<p> 加载的是修改后的模型参数，而模型还是proxylessnet.</p>
+</li>
+<li><p>将模型从imagenet 上训练好迁移到 cifar10等数据集上时，需要修改最后的全连接层，使得输出的维度和数据集的类别保持一致 </p>
+</li>
+<li><p>微调训练好的模型学习率需要更小，否则将会不收敛</p>
+</li>
+<li><p>lite_residual 保持固定的kernel size 需要重新计算stride 和 pad</p>
+</li>
+<li><p>在gpu3 和 gpu4 上训练的显存占用不一样 </p>
+</li>
+<li><p>断点续传有问题</p>
+</li>
+<li><p>lite residual  – bias + weight</p>
+</li>
+<li><p>nomal – bias + weight<br>(最后的全连接默认保留)<br>1) 只保留lite residual 参数 </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xingao98.top/2020/10/21/%E8%AE%BA%E6%96%87%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87%E7%A7%AF%E7%B4%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -197,10 +543,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-21 19:42:02 / 修改时间：19:47:56" itemprop="dateCreated datePublished" datetime="2020-10-21T19:42:02+08:00">2020-10-21</time>
+              <time title="创建时间：2020-10-21 19:42:02" itemprop="dateCreated datePublished" datetime="2020-10-21T19:42:02+08:00">2020-10-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-14 18:44:59" itemprop="dateModified" datetime="2020-12-14T18:44:59+08:00">2020-12-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -238,7 +590,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>88</span>
+              <span>434</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -259,7 +611,17 @@
       
           <p>&emsp;&emsp;抓住研究生的尾巴，开始了我的学术之旅~ 看论文会遇到一些个人觉得比较好的词汇以及词组，在这里记录一下，没准以后会用到呢？  </p>
 <h3 id="词组"><a href="#词组" class="headerlink" title="词组"></a>词组</h3><ul>
-<li>from scratch    从头开始  </li>
+<li>from scratch                  从头开始</li>
+<li>xxx-wise                      派生后缀-wise 来自古英语名词wise(方法、方式），它可以加在形容词、名词或动词后面构成方式副词，表示in a ～manner或in a ～ing manner（以…的方式）  </li>
+<li>xxx-free                      表示没有xxx  </li>
+<li>leverage                      字面意思是杠杆作用，实际应该解释为利用，更传神的说法是以小博大，Maximum Leverage（充分利用到极点）</li>
+<li>with respect to               关于,缩写w.r.t.</li>
+<li>take into account             考虑到</li>
+<li>x-fold                        x倍</li>
+<li>ingrident                     成分，可以在论述自己观点的时候作为”方面”的意思，例如two ingridents 两个方面 </li>
+<li>as per                        按照</li>
+<li>without loss of generality    不失一般性,缩写w.l.o.g. 或者 WLOG</li>
+<li>orders of magnitude           数量级</li>
 </ul>
 
       
@@ -311,7 +673,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-27 10:09:00" itemprop="dateModified" datetime="2020-10-27T10:09:00+08:00">2020-10-27</time>
+                <time title="修改时间：2020-11-10 16:50:55" itemprop="dateModified" datetime="2020-11-10T16:50:55+08:00">2020-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -962,344 +1324,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="XinGao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="学习中的阿Xin">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">LeetCode-旋转矩阵</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-07 11:36:37 / 修改时间：13:30:54" itemprop="dateCreated datePublished" datetime="2020-04-07T11:36:37+08:00">2020-04-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">旋转数组</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" class="post-meta-item leancloud_visitors" data-flag-title="LeetCode-旋转矩阵" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>旋转数组的思路有两种，一种是找到旋转后的位置，直接旋转，第二种是利用翻转。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/07/LeetCode-%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="XinGao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="学习中的阿Xin">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/" class="post-title-link" itemprop="url">JDK源码阅读笔记--java.lang.Object</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-04 17:02:41 / 修改时间：19:29:35" itemprop="dateCreated datePublished" datetime="2020-04-04T17:02:41+08:00">2020-04-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">JDK源码阅读</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/" class="post-meta-item leancloud_visitors" data-flag-title="JDK源码阅读笔记--java.lang.Object" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Object类是所有java类的共同祖先，jdk的源码阅读就从他开始吧。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/04/JDK%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-java-lang-Object/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xingao98.top/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="XinGao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="学习中的阿Xin">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/" class="post-title-link" itemprop="url">LinkedHashMap实现操作系统的LRU</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-01 11:33:57 / 修改时间：13:16:09" itemprop="dateCreated datePublished" datetime="2020-04-01T11:33:57+08:00">2020-04-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LRU/" itemprop="url" rel="index"><span itemprop="name">LRU</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LRU/LinkedHashMap/" itemprop="url" rel="index"><span itemprop="name">LinkedHashMap</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/" class="post-meta-item leancloud_visitors" data-flag-title="LinkedHashMap实现操作系统的LRU" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>LRU是操作系统的一个经典的页面置换算法。他的思路是将最近最久未使用的页面置换出去，许多缓存也使用的这个算法。Redis的内存移除规则就使用了它。本文介绍LRU的Java实现方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/01/LinkedHashMap%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84LRU/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1370,7 +1394,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1381,7 +1405,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1414,7 +1438,7 @@
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1423,12 +1447,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">53k</span>
+    <span title="站点总字数">58k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">48 分钟</span>
+    <span title="站点阅读时长">53 分钟</span>
 </div>
 
         
